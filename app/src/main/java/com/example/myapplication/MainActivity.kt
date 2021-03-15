@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -18,9 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.ui.BottomPagerViewModel
+import com.example.myapplication.ui.ContentScreen
 import com.example.myapplication.ui.theme.AppTheme
 import com.example.myapplication.ui.theme.MaterialColors
-import com.example.myapplication.ui.userlist.UsersScreen
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     @ExperimentalFoundationApi
@@ -29,15 +32,24 @@ class MainActivity : AppCompatActivity() {
         setContent {
             AppTheme {
                 // A surface container using the 'background' color from the theme
+                Log.d("asdasda", "start")
                 val selectedState = remember { mutableStateOf(0) }
+                val secondScreen: ComposableFun = {
+                    Text(text = "Content " + Random.nextInt(0, 10))
+                }
+                Log.d("asdasda", "selectedState")
+                val pagerViewModel = BottomPagerViewModel()
                 Surface(color = MaterialTheme.colors.background) {
                     //Greeting("Android")
                     //UsersScreen()
                     Scaffold(
                         content = {
+
+                            ContentScreen(pagerViewModel)
+                            /*Log.d("asdasda", "true")
                             if (selectedState.value == 0) {
                                 UsersScreen()
-                            } else Text(text = "Content")
+                            } else secondScreen()*/
 
                         },
                         bottomBar = {
@@ -53,12 +65,14 @@ class MainActivity : AppCompatActivity() {
                                             iconAsset = Icons.Filled.Favorite,
                                             text = "Item 1",
                                             click = {
+                                                pagerViewModel.firstTab.value = true
                                                 selectedState.value = 0
                                             })
                                         BuildBottomMenuItem(
                                             iconAsset = Icons.Filled.Create,
                                             text = "Item 2",
                                             click = {
+                                                pagerViewModel.secondTab.value = true
                                                 selectedState.value = 1
                                             })
                                     }
@@ -71,6 +85,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+typealias ComposableFun = @Composable () -> Unit
 
 @Composable
 fun BuildBottomMenuItem(iconAsset: ImageVector, text: String, click: () -> Unit) {

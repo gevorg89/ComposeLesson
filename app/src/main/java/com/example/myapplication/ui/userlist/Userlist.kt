@@ -8,19 +8,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Checkbox
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.ui.BottomPagerViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -29,14 +28,22 @@ import kotlinx.coroutines.delay
 @ExperimentalFoundationApi
 @Preview(showBackground = true)
 @Composable
-fun UsersScreen(userViewModel: UserViewModel = viewModel()) {
-    val users by userViewModel.users.observeAsState()
-    users?.let { UserList(users = it) }
-    val search by userViewModel.search.observeAsState("")
-    UserSearch(value = search, onValueChange = {
-        userViewModel.searchUser(it)
+fun UsersScreen(
+    pagerViewModel: BottomPagerViewModel = viewModel(),
+    userViewModel: UserViewModel = viewModel()
+) {
+    val state by pagerViewModel.firstTab.observeAsState(false)
+    val alpha = if (state) 1f else 0f
+    Surface(Modifier.alpha(alpha)) {
+        val users by userViewModel.users.observeAsState()
+        users?.let { UserList(users = it) }
+        val search by userViewModel.search.observeAsState("")
+        UserSearch(value = search, onValueChange = {
+            userViewModel.searchUser(it)
+        }
+        )
     }
-    )
+
 }
 
 @Composable
