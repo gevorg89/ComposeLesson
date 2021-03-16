@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.ui.BottomPagerViewModel
 import com.example.myapplication.ui.ContentScreen
 import com.example.myapplication.ui.theme.AppTheme
