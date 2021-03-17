@@ -22,16 +22,21 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.ui.BottomPagerViewModel
 import com.example.myapplication.ui.ContentScreen
+import com.example.myapplication.ui.movie.MovieScreen
 import com.example.myapplication.ui.theme.AppTheme
 import com.example.myapplication.ui.theme.MaterialColors
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
-
+//389ab18e8c7ba5c6ac629e72f354954c
+//eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzODlhYjE4ZThjN2JhNWM2YWM2MjllNzJmMzU0OTU0YyIsInN1YiI6IjYwNTI2MWRiOTc2YTIzMDA1MzMxMzk1MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gWeJN3EGHn0cYE28Enwxq9pfwAiSCg-oeFYOMjawhrc
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
+                MovieScreen()
                 // A surface container using the 'background' color from the theme
                 Log.d("asdasda", "start")
                 val selectedState = remember { mutableStateOf(0) }

@@ -61,7 +61,7 @@ fun UserScreenData(
     userDetail: () -> Unit
 ) {
     val users by userViewModel.users.observeAsState()
-    users?.let { UserList(users = it) }
+    users?.let { UserList(users = it, userDetail) }
     val search by userViewModel.search.observeAsState("")
     UserSearch(value = search, onValueChange = {
         userViewModel.searchUser(it)
@@ -86,7 +86,7 @@ fun UserSearch(value: String, onValueChange: (String) -> Unit) {
 
 @ExperimentalFoundationApi
 @Composable
-fun UserList(users: MutableList<Pair<Char, MutableList<User>>>) {
+fun UserList(users: MutableList<Pair<Char, MutableList<User>>>, userDetail: () -> Unit) {
     LazyColumn {
         users.forEach { (section, usersHeader) ->
             stickyHeader {
@@ -99,7 +99,7 @@ fun UserList(users: MutableList<Pair<Char, MutableList<User>>>) {
                 )
             }
             items(usersHeader) { user ->
-                UserItem(user = user)
+                UserItem(user = user, userDetail)
                 Spacer(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -112,7 +112,7 @@ fun UserList(users: MutableList<Pair<Char, MutableList<User>>>) {
 }
 
 @Composable
-fun UserItem(user: User) {
+fun UserItem(user: User, userDetail: () -> Unit) {
     val checkedState = remember { mutableStateOf(user.checked) }
     Card(
         modifier = Modifier
@@ -120,7 +120,8 @@ fun UserItem(user: User) {
             .padding(start = 16.dp, top = 16.dp, end = 16.dp)
 
             .clickable {
-                checkedState.value = !checkedState.value
+                //checkedState.value = !checkedState.value
+                userDetail()
             }, shape = RoundedCornerShape(16.dp)
     ) {
         Column(Modifier.background(color = Color(0xFF0EE055))) {
