@@ -19,7 +19,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.myapplication.ui.Actions
 import com.example.myapplication.ui.BottomPagerViewModel
+import com.example.myapplication.ui.Destinations
+import com.example.myapplication.ui.userdetail.UserDetail
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -34,16 +40,33 @@ fun UsersScreen(
 ) {
     val state by pagerViewModel.firstTab.observeAsState(false)
     val alpha = if (state) 1f else 0f
-    Surface(Modifier.alpha(alpha)) {
-        val users by userViewModel.users.observeAsState()
-        users?.let { UserList(users = it) }
-        val search by userViewModel.search.observeAsState("")
-        UserSearch(value = search, onValueChange = {
-            userViewModel.searchUser(it)
+    Scaffold(Modifier.alpha(alpha)) {
+        val navController = rememberNavController()
+        val actions = remember(navController) { Actions(navController) }
+        NavHost(navController, startDestination = Destinations.UserList) {
+            composable(Destinations.UserList) { backStackEntry ->
+                UserScreenData(userViewModel, actions.userDetail)
+            }
+            composable(Destinations.UserDetail) { backStackEntry ->
+                UserDetail()
+            }
         }
-        )
     }
+}
 
+@ExperimentalFoundationApi
+@Composable
+fun UserScreenData(
+    userViewModel: UserViewModel = viewModel(),
+    userDetail: () -> Unit
+) {
+    val users by userViewModel.users.observeAsState()
+    users?.let { UserList(users = it) }
+    val search by userViewModel.search.observeAsState("")
+    UserSearch(value = search, onValueChange = {
+        userViewModel.searchUser(it)
+    }
+    )
 }
 
 @Composable
