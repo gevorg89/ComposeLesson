@@ -13,7 +13,7 @@ interface ApiService {
     }
 
     @GET("movie/{id}?api_key=$apiKey&language=ru")
-    suspend fun getMovie(@Path("id") id: Long): MovieApi
+    suspend fun getMovie(@Path("id") id: Int): MovieApi
 
     @GET("movie/top_rated?api_key=$apiKey&language=ru")
     suspend fun getTop(@Query("page") page: Int): MovieTopApi

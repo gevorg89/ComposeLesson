@@ -14,7 +14,12 @@ object MovieTopMapper {
 
     fun map(movieTopResultApi: ResultApi): ResultModel {
         return ResultModel(
-            title = movieTopResultApi.title.orEmpty()
+            title = movieTopResultApi.title.orEmpty(),
+            id = movieTopResultApi.id ?: 0,
+            posterPath = movieTopResultApi.posterPath.orEmpty(),
+            originalTitle = movieTopResultApi.originalTitle.orEmpty(),
+            overview = movieTopResultApi.overview.orEmpty(),
+            releaseDate = movieTopResultApi.releaseDate.orEmpty()
         )
     }
 

@@ -15,10 +15,10 @@ class MovieViewModel @Inject constructor(private val repo: MovieRepository) : Vi
     private val _movie: MutableLiveData<MovieModel> = MutableLiveData()
     val movie = _movie
 
-    fun getMovie(id: Long) {
+    fun getMovie(id: Int) {
         //_movie.value = id
         viewModelScope.launch {
-            val movieModel = repo.getMovie(76341)
+            val movieModel = repo.getMovie(id)
             Timber.d(movie.toString())
             _movie.value = movieModel
         }

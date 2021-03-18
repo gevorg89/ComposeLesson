@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.rememberNavController
 import com.example.myapplication.ui.BottomPagerViewModel
 import com.example.myapplication.ui.ContentScreen
 import com.example.myapplication.ui.movie.MovieScreen
@@ -36,14 +35,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                MovieScreen()
+                //MovieScreen(taskId = backStackEntry.arguments?.getInt(TaskId) ?: 0)
                 // A surface container using the 'background' color from the theme
-                Log.d("asdasda", "start")
                 val selectedState = remember { mutableStateOf(0) }
                 val secondScreen: ComposableFun = {
                     Text(text = "Content " + Random.nextInt(0, 10))
                 }
-                Log.d("asdasda", "selectedState")
                 val pagerViewModel = BottomPagerViewModel()
                 Surface(color = MaterialTheme.colors.background) {
                     //Greeting("Android")

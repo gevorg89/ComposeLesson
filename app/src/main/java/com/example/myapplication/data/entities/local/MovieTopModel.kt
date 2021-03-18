@@ -5,5 +5,10 @@ data class MovieTopModel(
 )
 
 data class ResultModel(
-    val title: String
+    val title: String,
+    val posterPath: String,
+    val originalTitle: String,
+    val releaseDate: String,
+    val overview: String,
+    val id: Int
 )

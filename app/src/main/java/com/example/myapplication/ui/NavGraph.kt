@@ -14,8 +14,8 @@ object Destinations {
     const val MovieList = "movieList"
     const val MovieItem = "movieItem"
 
-    object TaskDetailArgs {
-        const val TaskId = "taskId"
+    object MovieDetailArgs {
+        const val MovieId = "movieId"
     }
 }
 
@@ -26,8 +26,8 @@ class Actions(navController: NavHostController) {
     val userDetail: () -> Unit = {
         navController.navigate(UserDetail)
     }
-    val movieItem: () -> Unit = {
-        navController.navigate(MovieItem)
+    val movieItem: (Int) -> Unit = { id ->
+        navController.navigate("$MovieItem/$id")
     }
     /*val openTask: (Int) -> Unit = { taskId ->
         navController.navigate("$TaskDetail/$taskId")

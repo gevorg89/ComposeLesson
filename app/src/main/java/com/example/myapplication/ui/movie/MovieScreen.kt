@@ -20,7 +20,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 @Preview
 @Composable
-fun MovieScreen(movieViewModel: MovieViewModel = viewModel(), movieId: Long = 0) {
+fun MovieScreen(movieViewModel: MovieViewModel = viewModel(), movieId: Int = 0) {
     movieViewModel.getMovie(movieId)
     val movieState by movieViewModel.movie.observeAsState()
     movieState?.let { movie ->

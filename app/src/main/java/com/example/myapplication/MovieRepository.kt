@@ -9,5 +9,5 @@ class MovieRepository @Inject constructor(
     private val apiService: ApiService
 ) {
     suspend fun getTop(page: Int) = MovieTopMapper.map(apiService.getTop(page))
-    suspend fun getMovie(id: Long) = MovieMapper.map(apiService.getMovie(id))
+    suspend fun getMovie(id: Int) = MovieMapper.map(apiService.getMovie(id))
 }
