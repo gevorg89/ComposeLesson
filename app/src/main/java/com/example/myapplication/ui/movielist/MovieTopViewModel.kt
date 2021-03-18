@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.movie
+package com.example.myapplication.ui.movielist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,16 +11,15 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(private val repo: MovieRepository) : ViewModel() {
+class MovieTopViewModel @Inject constructor(private val repo: MovieRepository) : ViewModel() {
     private val _movie: MutableLiveData<MovieModel> = MutableLiveData()
     val movie = _movie
 
-    fun getMovie(id: Long) {
+    fun getTop(page: Int) {
         //_movie.value = id
         viewModelScope.launch {
-            val movieModel = repo.getMovie(76341)
+            val movieModel = repo.getTop(page)
             Timber.d(movie.toString())
-            _movie.value = movieModel
         }
     }
 }

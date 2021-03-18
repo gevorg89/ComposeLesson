@@ -1,6 +1,6 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.ApiService
+import com.example.myapplication.data.remote.ApiService
 import com.example.myapplication.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetModule {
 
-    private const val BASE_URL = "https://api.themoviedb.org/3/"
+    const val BASE_URL = "https://api.themoviedb.org/3/"
 
     @Singleton
     @Provides

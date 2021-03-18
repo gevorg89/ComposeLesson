@@ -2,6 +2,7 @@ package com.example.myapplication.ui
 
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
+import com.example.myapplication.ui.Destinations.MovieItem
 import com.example.myapplication.ui.Destinations.SecondScreenInner
 import com.example.myapplication.ui.Destinations.UserDetail
 
@@ -10,6 +11,8 @@ object Destinations {
     const val SecondScreen = "secondScreen"
     const val SecondScreenInner = "secondScreenInner"
     const val UserDetail = "userDetail"
+    const val MovieList = "movieList"
+    const val MovieItem = "movieItem"
 
     object TaskDetailArgs {
         const val TaskId = "taskId"
@@ -22,6 +25,9 @@ class Actions(navController: NavHostController) {
     }
     val userDetail: () -> Unit = {
         navController.navigate(UserDetail)
+    }
+    val movieItem: () -> Unit = {
+        navController.navigate(MovieItem)
     }
     /*val openTask: (Int) -> Unit = { taskId ->
         navController.navigate("$TaskDetail/$taskId")

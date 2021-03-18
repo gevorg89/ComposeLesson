@@ -16,7 +16,7 @@
 
 package com.example.myapplication.di
 
-import com.example.myapplication.ApiService
+import com.example.myapplication.data.remote.ApiService
 import com.example.myapplication.MovieRepository
 import dagger.Module
 import dagger.Provides

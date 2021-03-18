@@ -6,6 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.myapplication.ui.movielist.MovieListScreen
 import com.example.myapplication.ui.second.SecondScreen
 import com.example.myapplication.ui.userlist.UsersScreen
 
@@ -13,7 +14,7 @@ import com.example.myapplication.ui.userlist.UsersScreen
 @ExperimentalFoundationApi
 @Composable
 fun ContentScreen(pagerViewModel: BottomPagerViewModel = viewModel()) {
-    UsersScreen(pagerViewModel)
+    MovieListScreen(pagerViewModel)
     SecondScreen(pagerViewModel)
 }
 
